@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>littleRPGCalc</title>
+    
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>littleRPGCalc</h1>
+        <p v-if="greetMe">{{ greetMessage }}</p>
+        <dice-buttons @add-to-results="addToResults"></dice-buttons>
+        <result-display :results="results"></result-display>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- Import Components -->
+    <script src="./components/DiceButtons.js"></script>
+    <script src="./components/ResultDisplay.js"></script>
+
+    <!-- Mound App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+
+</body>
+
+</html>
