@@ -17,7 +17,7 @@ app.component('dice-buttons', {
             <tr><td><button @click="rollDie(100)">d100</button></td></tr>
             <tr><td><form class="button-form" @submit.prevent="rollCustomDie">d<input id="customDie" v-model="customDie"><input class="button" type="submit" value="Roll!"></form></td></tr>
             <tr><td><hr></td></tr>
-            <tr><td>Per die bonus <input id="perDiceBonus" v-model="perDiceBonus"></td></tr>
+            <tr><td>Per die bonus <input id="perDieBonus" v-model="perDieBonus"></td></tr>
             <tr><td>Global bonus <input id="globalBonus" v-model="globalBonus"></td></tr>
         </table>
     </div>
@@ -26,8 +26,8 @@ app.component('dice-buttons', {
         return {
             customDie: null,
             diceCount: 1,
-            perDieBonus: null,
-            globalBonus: null,
+            perDieBonus: 0,
+            globalBonus: 0,
         }
     },
     methods: {
@@ -38,18 +38,21 @@ app.component('dice-buttons', {
             let resultValue = 0
             for (let i = 0; i<this.diceCount; i++) {
                 singleRolls.push(this.randomIntFromInterval(1, dieType))   
-                resultValue += singleRolls[i] + this.perDieBonus
+                resultValue = resultValue + singleRolls[i] + parseInt(this.perDieBonus)
             }
+            if (this.globalBonus > 0) resultValue += parseInt(this.globalBonus)
 
             //prepare result string for multiple dice
             let singleRollsDetailsString = ""
-            if (this.diceCount > 1) {
+            if (this.diceCount > 1 || this.globalBonus > 0 || this.perDieBonus > 0) {
                 singleRollsDetailsString += "("
                 for (let i=0; i<this.diceCount; i++) {
                     if (i > 0) singleRollsDetailsString += ", "
                     singleRollsDetailsString += singleRolls[i]
+                    if (this.perDieBonus > 0) singleRollsDetailsString += "+" + this.perDieBonus
                 }
                 singleRollsDetailsString += ")"
+                if (this.globalBonus > 0) singleRollsDetailsString += " + " + this.globalBonus
             }
         
             //Prepare result struct
