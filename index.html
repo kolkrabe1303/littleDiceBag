@@ -24,13 +24,10 @@
             <p v-if="greetMe">{{ greetMessage }}</p>
         </header>
 
-        <main class="border-bottom mb-4">
-            <section class="mb-4">
-                <dice-buttons @add-to-results="addToResults"></dice-buttons>
-            </section>
-            <result-display class="result-display" :results="results"></result-display>
-        </main>
-        <footer class="mb-4 text-center">
+        <dice-board @add-to-results="addToResults"></dice-board>
+        <result-display :results="results"></result-display>
+        
+        <footer class="text-center">
             &copy; 2021 <a href="https://www.markusneeb.de">MN</a>
         </footer>
     </div>
@@ -39,7 +36,7 @@
     <script src="./main.js"></script>
 
     <!-- Import Components -->
-    <script src="./components/DiceButtons.js"></script>
+    <script src="./components/DiceBoard.js"></script>
     <script src="./components/ResultDisplay.js"></script>
 
     <!-- Mound App -->
