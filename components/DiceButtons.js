@@ -4,21 +4,28 @@ app.component('dice-buttons', {
     /*html*/
     `
     <h2>Dice-Board</h2>
-    <div class="dice-buttons">
-        <table>
-            <tr><td><input id="dieCount" v-model="diceCount"><button @click="setDiceCount(1)">1</button><button @click="setDiceCount(2)">2</button><button @click="setDiceCount(3)">3</button></td></tr>
-            <tr><td><hr></td></tr>
-            <tr><td><button @click="rollDie(4)">d4</button></td></tr>
-            <tr><td><button @click="rollDie(6)">d6</button></td></tr>
-            <tr><td><button @click="rollDie(8)">d8</button></td></tr>
-            <tr><td><button @click="rollDie(10)">d10</button></td></tr>
-            <tr><td><button @click="rollDie(12)">d12</button></td></tr>
-            <tr><td><button @click="rollDie(20)">d20</button></td></tr>
-            <tr><td><button @click="rollDie(100)">d100</button></td></tr>
-            <tr><td><form class="button-form" @submit.prevent="rollCustomDie">d<input id="customDie" v-model="customDie"><input class="button" type="submit" value="Roll!"></form></td></tr>
-            <tr><td><hr></td></tr>
-            <tr><td>Per die bonus <input id="perDieBonus" v-model="perDieBonus"></td></tr>
-            <tr><td>Global bonus <input id="globalBonus" v-model="globalBonus"></td></tr>
+    <div class="dice-count mb-2">
+        <label>Number of dice</label><br><button @click="changeDiceCount(-1)" class="btn-pls-mns">-</button><input id="dieCount" v-model="diceCount"><button @click="changeDiceCount(1)" class="btn-pls-mns">+</button>
+    </div>
+    <div class="dice-buttons mb-2">
+        <div class="row mb-1">
+            <div class="col-4 text-center"><button @click="rollDie(4)" class="w-100">d4</button></div>
+            <div class="col-4 text-center"><button @click="rollDie(6)" class="w-100">d6</button></div>
+            <div class="col-4 text-center"><button @click="rollDie(8)" class="w-100">d8</button></div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4 text-center"><button @click="rollDie(10)" class="w-100">d10</button></div>
+            <div class="col-4 text-center"><button @click="rollDie(12)" class="w-100">d12</button></div>
+            <div class="col-4 text-center"><button @click="rollDie(20)" class="w-100">d20</button></div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4 text-center"><button @click="rollDie(100)" class="w-100">d100</button></div>
+            <div class="col-8 text-center">d<input id="customDie" v-model="customDie"><button @click="rollCustomDie()">Roll!</button></div>
+        </div>
+    </div>
+    <div class="dice-bonus row mb-2">
+        <div class="col-6"><label>Per die bonus</label><br><button @click="changePerDieBonus(-1)" class="btn-pls-mns">-</button><input id="perDieBonus" v-model="perDieBonus"><button @click="changePerDieBonus(1)" class="btn-pls-mns">+</button></div>
+        <div class="col-6"><label>Global bonus</label><br><button @click="changeGlobalBonus(-1)" class="btn-pls-mns">-</button><input id="globalBonus" v-model="globalBonus"><button @click="changeGlobalBonus(1)" class="btn-pls-mns">+</button></div>
         </table>
     </div>
     `,
@@ -31,6 +38,12 @@ app.component('dice-buttons', {
         }
     },
     methods: {
+        changePerDieBonus(amount) {
+            this.perDieBonus = this.perDieBonus + amount
+        },
+        changeGlobalBonus(amount) {
+            this.globalBonus = this.globalBonus + amount
+        },
         rollDie(dieType) {
 
             //prepare result
@@ -76,6 +89,9 @@ app.component('dice-buttons', {
         },
         setDiceCount(diceCount) {
             this.diceCount = diceCount
+        },
+        changeDiceCount(amount) {
+            this.diceCount = this.diceCount + amount
         }
     }
 })
