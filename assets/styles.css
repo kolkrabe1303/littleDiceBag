@@ -9,6 +9,7 @@ body {
   justify-items: center;
   height: 100%;
   margin: 0;
+  font-family: "PT Serif", serif;
 }
 
 #app {
@@ -21,8 +22,31 @@ body {
   flex-flow: column;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+@media (min-width: 500px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-variant: small-caps;
+}
+@media (min-width: 500px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+}
+
 header {
   flex: 0 1 auto;
+  text-align: center;
+}
+header p {
+  margin-top: -0.5rem;
 }
 
 .dice-board {
@@ -40,13 +64,31 @@ footer {
   flex: 0 1 auto;
 }
 
+label {
+  font-size: 0.8rem;
+}
+
 input {
-  width: 64px;
+  min-width: 32px;
   text-align: center;
+  height: 32px;
+}
+
+button {
+  text-align: center;
+  height: 32px;
 }
 
 .btn-pls-mns {
-  width: 32px;
+  min-width: 32px;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.ms25 {
+  margin-left: 25%;
 }
 
 /*# sourceMappingURL=styles.css.map */

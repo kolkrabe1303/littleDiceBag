@@ -1,14 +1,18 @@
 app.component('dice-board', {
-    emits: ['add-to-results'],
+    emits: ['add-to-results', 'clearResults'],
     template:
     /*html*/
     `
-    <div class="dice-board mb-4">
-        <h2>Dice-Board</h2>
-        <div class="dice-count pb-3 mb-3 border-bottom text-center">
-            <label>Number of dice</label><br><button @click="changeDiceCount(-1)" class="btn-pls-mns">-</button><input id="dieCount" v-model="diceCount"><button @click="changeDiceCount(1)" class="btn-pls-mns">+</button>
+    <div class="dice-board pb-2 mb-2 border-bottom">
+        <div class="dice-count mb-1 row">
+            <div class="col-6 text-center"><label class="no-wrap">Number of dice</label><br><div class="no-wrap w-100"><button @click="changeDiceCount(-1)" class="btn-pls-mns w-25">-</button><input id="dieCount" v-model="diceCount" class="w-50"><button @click="changeDiceCount(1)" class="btn-pls-mns w-25">+</button></div></div>
+            <div class="col-6 text-center"><label class="no-wrap">Per die bonus</label><br><div class="no-wrap w-100"><button @click="changePerDieBonus(-1)" class="btn-pls-mns w-25">-</button><input id="perDieBonus" v-model="perDieBonus" class="w-50"><button @click="changePerDieBonus(1)" class="btn-pls-mns w-25">+</button></div></div>
         </div>
-        <div class="dice-buttons pb-3 mb-2 border-bottom">
+        <div class="dice-count pb-2 mb-2 row">
+            <div class="col-6"></div>        
+            <div class="col-6 text-center"><label class="no-wrap">Global bonus</label><br><div class="no-wrap w-100"><button @click="changeGlobalBonus(-1)" class="btn-pls-mns w-25">-</button><input id="globalBonus" v-model="globalBonus" class="w-50"><button @click="changeGlobalBonus(1)" class="btn-pls-mns w-25">+</button></div></div>
+        </div>
+        <div class="dice-buttons">
             <div class="row mb-2">
                 <div class="col-4 text-center"><button @click="rollDie(4)" class="w-100">d4</button></div>
                 <div class="col-4 text-center"><button @click="rollDie(6)" class="w-100">d6</button></div>
@@ -19,16 +23,13 @@ app.component('dice-board', {
                 <div class="col-4 text-center"><button @click="rollDie(12)" class="w-100">d12</button></div>
                 <div class="col-4 text-center"><button @click="rollDie(20)" class="w-100">d20</button></div>
             </div>
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-4 text-center"><button @click="rollDie(100)" class="w-100">d100</button></div>
-                <div class="col-8 text-center">d<input id="customDie" v-model="customDie"><button @click="rollCustomDie()">Roll!</button></div>
+                <div class="col-4 text-center"><button @click="rollCustomDie()" class="w-50">d</button><input id="customDie" v-model="customDie" class="text-start w-50" placeholder="xx"></div>
+                <div class="col-4 text-center"><button @click="clearBoard()" class="w-100">Clear</button></div>
             </div>
         </div>
-        <div class="dice-bonus row mb-3">
-            <div class="col-6 text-center"><label>Per die bonus</label><br><button @click="changePerDieBonus(-1)" class="btn-pls-mns">-</button><input id="perDieBonus" v-model="perDieBonus"><button @click="changePerDieBonus(1)" class="btn-pls-mns">+</button></div>
-            <div class="col-6 text-center"><label>Global bonus</label><br><button @click="changeGlobalBonus(-1)" class="btn-pls-mns">-</button><input id="globalBonus" v-model="globalBonus"><button @click="changeGlobalBonus(1)" class="btn-pls-mns">+</button></div>
-            </table>
-        </div>
+        
     </div>
     `,
     data() {
@@ -55,19 +56,21 @@ app.component('dice-board', {
                 singleRolls.push(this.randomIntFromInterval(1, dieType))   
                 resultValue = resultValue + singleRolls[i] + parseInt(this.perDieBonus)
             }
-            if (this.globalBonus > 0) resultValue += parseInt(this.globalBonus)
+            if (this.globalBonus != 0) resultValue += parseInt(this.globalBonus)
 
             //prepare result string for multiple dice
             let singleRollsDetailsString = ""
-            if (this.diceCount > 1 || this.globalBonus > 0 || this.perDieBonus > 0) {
+            if (this.diceCount > 1 || this.globalBonus != 0 || this.perDieBonus != 0) {
                 singleRollsDetailsString += "("
                 for (let i=0; i<this.diceCount; i++) {
                     if (i > 0) singleRollsDetailsString += ", "
                     singleRollsDetailsString += singleRolls[i]
                     if (this.perDieBonus > 0) singleRollsDetailsString += "+" + this.perDieBonus
+                    else if (this.perDieBonus < 0) singleRollsDetailsString += "-" + (-1 * this.perDieBonus)
                 }
                 singleRollsDetailsString += ")"
                 if (this.globalBonus > 0) singleRollsDetailsString += " + " + this.globalBonus
+                else if (this.globalBonus < 0) singleRollsDetailsString += " - " + (-1 * this.globalBonus)
             }
         
             //Prepare result struct
@@ -94,6 +97,14 @@ app.component('dice-board', {
         },
         changeDiceCount(amount) {
             this.diceCount = this.diceCount + amount
+        },
+        clearBoard() {
+            this.customDie = null
+            this.diceCount = 1
+            this.perDieBonus = 0
+            this.globalBonus = 0
+
+            this.$emit('clearResults')
         }
     }
 })

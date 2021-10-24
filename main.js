@@ -9,6 +9,9 @@ const app = Vue.createApp({
     methods: {
         addToResults(result) {
             this.results.unshift(result)
+        },
+        clearResults() {
+            this.results = []
         }
     }
 })
