@@ -55,20 +55,20 @@ header {
     flex-flow: column;
     flex: 1 1 auto;
     overflow-y: scroll;
+    overflow-x: hidden;
     background-color: #ccc;
 
     .result-roll-label {
-        //min-width: 35%;
-        //height: 36px;
+        min-width: 25%;
     }
 
     .result-sum-label {
-        font-size: 1.5rem;
-        margin-bottom: -0.2rem;
+    
     }
 
     .result-math-label {
-        //width: 100%;
+        margin-top: -5px;
+        margin-left: 25%;
     }
 }
 
