@@ -58,17 +58,39 @@ header {
     overflow-x: hidden;
     background-color: #ccc;
 
-    .result-roll-label {
-        min-width: 25%;
-    }
-
-    .result-sum-label {
-    
-    }
-
-    .result-math-label {
-        margin-top: -5px;
-        margin-left: 25%;
+    .result {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #bbb;
+        .result-table {
+            width: 100%;
+            .tr-result {
+                vertical-align: text-bottom;
+                td {
+                    line-height: 24px;
+                    padding-bottom: 0px;
+                }
+                .td-roll {
+                    text-align: right;
+                    width: 25%;
+                    white-space: nowrap;
+                }
+                .td-sum {
+                    text-align: left;
+                    padding-left: 0.25rem;
+                    font-size: 1.75rem;
+                }
+            }
+            .tr-math {
+                td {
+                    padding-top: 0px;
+                }
+                .td-math {
+                    padding-left: 0.25rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
     }
 }
 
@@ -83,13 +105,10 @@ label {
 input {
     min-width: 35px;
     text-align: center;
-    //height: 32px;
 }
 
 button {
     text-align: center;
-    //height: 32px;
-    //line-height: 32px;
 }
 
 .btn {
@@ -108,11 +127,4 @@ button {
 
 .no-wrap {
     white-space: nowrap;
-}
-
-.ms25{
-    margin-left: 25%;
-}
-.ms35{
-    margin-left: 35%;
 }
