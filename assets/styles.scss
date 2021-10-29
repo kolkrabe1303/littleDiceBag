@@ -47,7 +47,10 @@ header {
 
 .dice-board {
     flex: 0 1 auto;
-    //width: 100%;
+
+    label {
+        font-size: 0.8rem;
+    }
 }
 
 .result-display {
@@ -55,36 +58,56 @@ header {
     flex-flow: column;
     flex: 1 1 auto;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: auto;
     background-color: #ccc;
 
     .result {
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
         border-bottom: 1px solid #bbb;
         .result-table {
             width: 100%;
+            min-width: 272px;
+            overflow-x: auto;
             .tr-result {
-                vertical-align: text-bottom;
                 td {
-                    line-height: 24px;
                     padding-bottom: 0px;
                 }
                 .td-roll {
+                    vertical-align: text-bottom;
                     text-align: right;
                     width: 25%;
                     white-space: nowrap;
                 }
                 .td-sum {
+                    line-height: 32px;
+                    vertical-align: text-bottom;
                     text-align: left;
                     padding-left: 0.25rem;
                     font-size: 1.75rem;
+                }
+                .td-multiplier {
+                    width: 112px;
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    padding-bottom: 2px;
+                    .badge {
+                        line-height: 15px;
+                        text-align: center;
+                        width: 26px;
+                        padding-left: 2px;
+                        padding-right: 2px;
+                        font-weight: normal;
+                        margin-left: 2px;
+                        margin-bottom: 2px;
+                    }
                 }
             }
             .tr-math {
                 td {
                     padding-top: 0px;
                 }
+                
                 .td-math {
                     padding-left: 0.25rem;
                     font-size: 0.8rem;
@@ -98,9 +121,7 @@ footer {
     flex: 0 1 auto;
 }
 
-label {
-    font-size: 0.8rem;
-}
+
     
 input {
     min-width: 35px;

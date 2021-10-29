@@ -71,17 +71,21 @@ app.component('dice-board', {
                 singleRollsDetailsString += ")"
                 if (this.globalBonus > 0) singleRollsDetailsString += " + " + this.globalBonus
                 else if (this.globalBonus < 0) singleRollsDetailsString += " - " + (-1 * this.globalBonus)
+            } else {
+                singleRollsDetailsString += singleRolls[0]
             }
         
             //Prepare result struct
             let result = {
-                value: resultValue,
+                value: resultValue,         //current shown result value modified by multiplier
+                valueBase: resultValue,     //unmodified base result value
                 dieType: dieType,
                 diceCount: this.diceCount,
                 singleRolls: singleRolls,
                 singleRollsDetailsString:  singleRollsDetailsString,
                 perDieBonus: this.perDieBonus,
-                globalBonus: this.globalBonus
+                globalBonus: this.globalBonus,
+                multiplier: 1
             }
 
             //Log event and emit result to main.js
