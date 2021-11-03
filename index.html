@@ -24,8 +24,11 @@
 <body class="bg-dark">
     <div id="app" class="px-3 pt-3 pb-2">
         <header class="border-bottom pb-1 mb-2">
-            <h1 class="mb-0">Little Dice Bag</h1>
-            <div v-if="greetMe" class="text-muted small">{{ greetMessage }}</div>
+            <div class="title">
+                <h1 class="mb-0">Little Dice Bag</h1>
+                <div v-if="greetMe" class="text-muted small subhead">{{ greetMessage }}</div>
+            </div>
+            <img class="logo" src="assets/imgs/LittleDiceBag-Logo.svg" alt="LittleDiceBag Logo">
         </header>
 
         <dice-board @add-to-results="addToResults" @clear-results="clearResults"></dice-board>

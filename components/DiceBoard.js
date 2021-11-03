@@ -38,6 +38,7 @@ app.component('dice-board', {
             diceCount: 1,
             perDieBonus: 0,
             globalBonus: 0,
+            customDieFlag: false
         }
     },
     methods: {
@@ -85,14 +86,17 @@ app.component('dice-board', {
                 singleRollsDetailsString:  singleRollsDetailsString,
                 perDieBonus: this.perDieBonus,
                 globalBonus: this.globalBonus,
-                multiplier: 1
+                multiplier: 1,
+                isCustomDie: this.customDieFlag //true if custom die type
             }
 
             //Log event and emit result to main.js
             console.log("Rolled " + result.diceCount + " die of type: " + result.dieType + " Result: " + result.value)
             this.$emit('add-to-results', result)
+            this.customDieFlag = false
         },
         rollCustomDie() {
+            this.customDieFlag = true
             this.rollDie(this.customDie)
         },
         randomIntFromInterval(min, max) {

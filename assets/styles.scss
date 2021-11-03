@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.65rem;
     @media(min-width: 500px) {
         font-size: 2rem;
     }    
@@ -39,9 +39,21 @@ h2 {
 
 header {
     flex: 0 1 auto;
-    text-align: center;
-    p {
-        margin-top: -0.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    .logo {
+        height: 64px;
+        width: 64px;
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+    .title {
+        text-align: center;
+        .subhead {
+            margin-top: -0.2rem;
+        }
     }
 }
 
@@ -72,6 +84,16 @@ header {
             .tr-result {
                 td {
                     padding-bottom: 0px;
+                }
+                .td-die-img {
+                    vertical-align: bottom;
+                    text-align: left;
+                    width: 32px;
+
+                    img {
+                        width: 32px;
+                        height: auto;
+                    }
                 }
                 .td-roll {
                     vertical-align: text-bottom;

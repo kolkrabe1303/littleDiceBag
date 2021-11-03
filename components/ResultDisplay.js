@@ -12,6 +12,10 @@ app.component('result-display', {
         <div v-for="(result, index) in results" class="result">
             <table class="result-table">
                 <tr class="tr-result">
+                    <td class="td-die-img">
+                        <img v-if="!result.isCustomDie" :src="'assets/imgs/d' + result.dieType + '-color.svg'">
+                        <img v-else :src="'assets/imgs/dSpecial-color.svg'">
+                    </td>
                     <td class="td-roll">
                         <strong>
                             {{result.diceCount}}d{{ result.dieType }}<span v-if="result.perDieBonus > 0">+{{ result.perDieBonus * result.diceCount}}</span><span v-else-if="result.perDieBonus < 0">-{{ (result.perDieBonus * -1 * result.diceCount) }}</span>
@@ -31,7 +35,7 @@ app.component('result-display', {
                     </td>
                 </tr>
                 <tr class="tr-math" v-if="result.diceCount != 1 || result.globalBonus != 0 || result.perDieBonus != 0 || result.multiplier != 1">
-                    <td></td>
+                    <td colspan="2"></td>
                     <td class="td-math" colspan="2"><span v-if="result.multiplier != 1">[</span>{{ result.singleRollsDetailsString }}<span v-if="result.multiplier != 1">] &times; {{ result.multiplier }}</span></td>
                 </tr>
             </table>

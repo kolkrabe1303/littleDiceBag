@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
 }
 @media (min-width: 500px) {
   h1 {
@@ -42,10 +42,22 @@ h2 {
 
 header {
   flex: 0 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+header .logo {
+  height: 64px;
+  width: 64px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+header .title {
   text-align: center;
 }
-header p {
-  margin-top: -0.5rem;
+header .title .subhead {
+  margin-top: -0.2rem;
 }
 
 .dice-board {
@@ -75,6 +87,15 @@ header p {
 }
 .result-display .result .result-table .tr-result td {
   padding-bottom: 0px;
+}
+.result-display .result .result-table .tr-result .td-die-img {
+  vertical-align: bottom;
+  text-align: left;
+  width: 32px;
+}
+.result-display .result .result-table .tr-result .td-die-img img {
+  width: 32px;
+  height: auto;
 }
 .result-display .result .result-table .tr-result .td-roll {
   vertical-align: text-bottom;
